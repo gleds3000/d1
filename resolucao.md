@@ -51,7 +51,18 @@ prencher com dados de configuracao da app
     volume null
     portas 5000
     workdir(diretorio de trabalho da app) /app
-executar o camando para passar o uso do json  ou colar na aba json da task definition 
+executar o camando ou passar para o uso do json copiando e colar o container definition no Configure via JSON da task definition 
+
+linha de Comando 
+#gerar o esqueleto do Container definition 
+aws ecs register-task-definition --generate-cli-skeleton
+#Executar comando para gerar versao nova 
+###(premissa instalar o jq- json query windows choco install jq  )
+export CONTAINER_DEFINITION=$(cat cd.json)
+export TASK_VERSION=$(aws ecs register-task-definition --family desafio-fam --container-definitions "$CONTAINER_DEFINITION" | jq --raw-output '.taskDefinition.revision')
+#executar comando para ativar o servico e a tarefa nova 
+    $(aws ecs update-service --cluster desafio-cluster --service desafio-service --task-definition desafio-fam:$TASK_VERSION | jq --raw-output '.service.serviceName')
+
 
 #Criar Servico 
 
