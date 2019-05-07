@@ -9,6 +9,6 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-ENV NAME desafio1
+ENV NAME desafio
 
 CMD ["python", "main.py"]

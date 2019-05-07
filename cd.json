@@ -1,0 +1,37 @@
+[
+    {
+      "name": "desafio",
+      "image": "694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0",
+      "cpu": "256",
+      "memory": "1024",
+      "memoryReservation": 64,
+      "portMappings": [
+        {
+            "hostPort": "5000",
+            "containerPort": "5000",
+            "protocol": "tcp"
+        }
+    ],
+      "essential": true,
+      "entryPoint": [],
+      "command": [],
+      "environment": [
+        {
+          "name": "ENV_DEBUG",
+          "value": "true"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "workingDirectory": "/app",
+      "disableNetworking": false,
+      "privileged": true,
+      "readonlyRootFilesystem": false,
+      "dnsServers": [],
+      "dnsSearchDomains": [],
+      "dockerSecurityOptions": [],
+      "logConfiguration": {
+        "logDriver": "json-file"
+      }
+    }
+  ]

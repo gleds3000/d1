@@ -1,4 +1,6 @@
 ''' Desafio 1 - Resolução'''
+Escolho essa opcao de subir via ECS a aplicacao / contanier, 
+pois os recursos entregam estabilidade e resiliência. e pronto para fall back   
 ### Objetivo:
     - Disponibilizar imagem da aplicacao para docker 
     - Criar estrutura no servico  AWS ECS  
@@ -8,7 +10,7 @@
 estruturação da app
 - estrutura de pastas - organização
 - criacao do arquivo Dockerfile 
-acessar AWS criar repositorio no AWS ECR - Nome:desafio
+acessar AWS console, acessar serviço AWS ECR criar repositorio no AWS ECR - Nome:desafio
 na maquina de desenvolvimento com docker      
 
 ## Login aws CLI 
@@ -44,10 +46,11 @@ criar o arquivo  Container Definitions json cd.json (consta no repo)
 ou 
 prencher com dados de configuracao da app 
     temos como entendimento: 
-    imagem 
-    volume 
-    portas 
-    workdir(diretorio de trabalho da app)
+    Requires compatibilities: EC2
+    imagem : 694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0
+    volume null
+    portas 5000
+    workdir(diretorio de trabalho da app) /app
 executar o camando para passar o uso do json  ou colar na aba json da task definition 
 
 #Criar Servico 
