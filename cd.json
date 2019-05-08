@@ -1,43 +1,40 @@
-[
-    {
-      "requiresCompatibilities": [
-        "EC2"
-    ],
-    "family": "desafio",
-    "taskRoleArn": "arn:aws:iam::694252404448:role/ecsTaskExecutionRole",
-    "executionRoleArn": "arn:aws:iam::694252404448:role/ecsTaskExecutionRole",
-    "name": "desafio",
-    "image": "694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0",
-    "cpu": "256",
-    "memory": "1024",
-    "memoryReservation": 64,
-    "portMappings": [
+{
+  "containerDefinitions": [
       {
-            "hostPort": "5000",
-            "containerPort": "5000",
-            "protocol": "tcp"
+          "name": "desafio",
+          "image": "694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0",
+          "cpu": 256,
+          "command": [],
+          "memory": 1024,
+          "essential": true,
+          "environment": null,
+          "secrets": null,
+          "resourceRequirements": null,
+          "portMappings": [
+              {
+                  "hostPort": "5000",
+                  "containerPort": "5000",
+                  "protocol": "tcp"
+              }
+          ],
+          "mountPoints": null,
+          "volumesFrom": null,
+          "hostname": null,
+          "user": null,
+          "workingDirectory": null,
+          "extraHosts": null,
+          "logConfiguration": null,
+          "ulimits": null,
+          "dockerLabels": null,
+          "dependsOn": null,
+          "repositoryCredentials": {
+              "credentialsParameter": ""
+          }
       }
-    ],
-      "essential": true,
-      "entryPoint": [],
-      "command": [],
-      "environment": [
-        {
-          "name": "ENV_DEBUG",
-          "value": "true"
-        }
-      ],
-      "mountPoints": [],
-      "volumesFrom": [],
-      "workingDirectory": "/app",
-      "disableNetworking": false,
-      "privileged": true,
-      "readonlyRootFilesystem": false,
-      "dnsServers": [],
-      "dnsSearchDomains": [],
-      "dockerSecurityOptions": [],
-      "logConfiguration": {
-        "logDriver": "json-file"
-      }
-    }
-  ]
+  ],
+  "family": "desafio",
+  "volumes": [],
+  "placementConstraints": [],
+  "memory": "2048",
+  "cpu": "1024"
+}
