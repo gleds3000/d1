@@ -1,4 +1,4 @@
-# Desafio 1 - Resolução'''
+# Desafio 1 - Resolução
 Escolho essa opcao de subir via ECS a aplicacao / contanier, 
 pois os recursos entregam estabilidade e resiliência. e pronto para fall back   
 ## Objetivo:
@@ -26,19 +26,19 @@ na maquina de desenvolvimento com docker
 
 ## Build da imagem
 
-    ` docker build -t desafio:1.0.0 . `
+  ` docker build -t desafio:1.0.0 .`
 
 ## tag  na imagem 
     
-    ` docker tag desafio:1.0.0 694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0 `
+  ` docker tag desafio:1.0.0 694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0 `
 
 ## Enviar para o ECR 
 
-   `  docker push 694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0 `
+  ` docker push 694252404448.dkr.ecr.us-east-1.amazonaws.com/desafio:1.0.0 `
 
-#Estrutura ECS 
-### criar usa Key pair em EC2 > Network Security > Key pair
-##Criar task definition --- arquivo json com detalhes dessa criacao  
+# Estrutura ECS 
+*criar usa Key pair em EC2 > Network Security > Key pair*
+## Criar task definition --- arquivo json com detalhes dessa criacao  
     Para criar o cluster usar acessar o AWS ECS 
     Selecionar em " Select cluster template" :  EC2 Linux + Networking  
     proximo passo 
@@ -68,17 +68,26 @@ ou
 no cluster Desafio aba "Service"  create 
 >launch type: EC2
 >Number of tasks:1  
+>Configure network: conforme o default caso nao exista precisa criar
+>Set Auto Scaling: Não -  obs um dos motivos de usar ECS é esse poder usar Auto Scaling nas app.
+> Create service - ok  - ECS Service status - 4 of 4 complete
 #Criar task 
+>run task >  launch type: EC2
+> informar cluster vpc (selecionar a default)
+> informar uma subnet 
+> run task 
 
+# EC2 com o ip publico ou host ja eh possivel acessar a app. 
 
-### linhas de Comando 
+# gerando por linha de comando ou atualizando infra ECS 
+### linhas de Comando  
 #gerar o esqueleto do Container definition  (somente para conhecimento caso necessite validar o Container definition) 
 aws ecs register-task-definition --generate-cli-skeleton
-#Executar comando para gerar versao nova task definition
-###(premissa instalar o jq- json query windows choco install jq  )
+# Executar comando para gerar versao nova task definition
+### (premissa instalar o jq- json query windows choco install jq  )
 `export CONTAINER_DEFINITION=$(cat cd.json)`
 `export TASK_VERSION=$(aws ecs register-task-definition --family desafio-fam --container-definitions "$CONTAINER_DEFINITION" | jq --raw-output '.taskDefinition.revision')`
-#executar comando para ativar o servico e a tarefa nova 
+# Executar comando para ativar o servico e a tarefa nova 
 `$(aws ecs update-service --cluster desafio-cluster --service desafio-service --task-definition desafio-fam:$TASK_VERSION | jq --raw-output '.service.serviceName')`
 
 
