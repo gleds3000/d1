@@ -23,6 +23,30 @@ def add_characters():
   print(request.get_json())
   characters.append(request.get_json())
   return '', 204
+  
+@app.route('/characters/<string:name>', methods=['GET'])
+def pesquisa(name):
+    busca = characters[0]
+    for i,c in enumerate(characters):
+      if c['name'] == name:
+        busca = characters[i]
+    return jsonify({'characters' : busca})
+
+
+@app.route('/characters/<string:name>',  methods=['DELETE'])
+def del_characters(name):
+  for i,c in enumerate(characters):
+    if c['name'] == name:
+      del characters[i]  
+  return "vc excluiu " + characters[i], 204
+
+@app.route('/characters/<string:name>', methods=['PUT'])
+def upone(name):
+    editar = request.get_json()
+    for i,c in enumerate(qcharactersuarks):
+      if c['name'] == name:
+        characters[i] = editar  
+    return "vc editou " + characters[i], 204
 
 
 @app.route('/status')
