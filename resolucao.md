@@ -82,25 +82,25 @@ no cluster Desafio aba "Service"  create
 # gerando por linha de comando ou atualizando infra ECS 
 ### tudo por linhas de Comando  
 
-> Passo 1:  Criar o Cluster
+## Passo 1:  Criar o Cluster
  ` aws ecs create-cluster --cluster-name Desafio-cluster`
-> Passo 2: criar uma EC2 com a imagem: Amazon ECS AMI
+## Passo 2: criar uma EC2 com a imagem: Amazon ECS AMI
 exemplo amzn-ami-2018.03.p-amazon-ecs-optimized
 https://console.aws.amazon.com/ec2/v2/home?region=us-east-2#LaunchInstanceWizard:ami=ami-0351a163d5f20e068
-> Passo 3: checar se tudo foi criado EC2 executando o agent docker 1.27 (up 2019)
+## Passo 3: checar se tudo foi criado EC2 executando o agent docker 1.27 (up 2019)
 ` aws ecs list-container-instances --cluster desafio-cluster `
 
-> Paaso 4: validar e descrever o container definition
+## Paaso 4: validar e descrever o container definition
   `aws ecs describe-container-instances --cluster desafio-cluster --container-instances container_instance_ID`
-> Passo 5: Register a Task Definition
+## Passo 5: Register a Task Definition
   `aws ecs register-task-definition --cli-input-json file://cd.json`
-> Passo 6: validar a Task Definitions
+## Passo 6: validar a Task Definitions
   `aws ecs list-task-definitions`
-> Passo 7: Executar a Task
+## Passo 7: Executar a Task
   `aws ecs run-task --cluster desafio-cluster --task-definition desafio:1 --count 1`
-> Passo 8: validar Tasks
+## Passo 8: validar Tasks
   `aws ecs list-tasks --cluster desafio-cluster` 
-> Passo 9: validar a Running Task - status running. 
+## Passo 9: validar a Running Task - status running. 
   `aws ecs describe-tasks --cluster desafio-cluster --task task_ID`
 
 *Alguns testes realizado para deixar a infra ok*
